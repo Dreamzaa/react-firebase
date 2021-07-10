@@ -17,9 +17,11 @@ export default function FirebaseCrud (){
     const [aUserName,setaUserName] = useState('');
     const [aUserEmail,setaUserEmail] = useState('');
     const [userId,setUserId] = useState('');
+    const [resetEmail, setResetEmail] = useState('');
 
     useEffect(() => {
         const firestore = firebaseConfig.database().ref('List');
+        const user = firebaseConfig.auth().currentUser;
         firestore.on('value',(response)=>{
             const data = response.val();
             let userInfo = [];
@@ -34,6 +36,11 @@ export default function FirebaseCrud (){
             }
             setUserData(userInfo);
         })
+        if(user != null)
+        {
+            const email = user.email;
+            setResetEmail(email);
+        } 
     },[])
 
     const handleAddUser = () => {
@@ -77,6 +84,21 @@ export default function FirebaseCrud (){
         const firestore = firebaseConfig.database().ref('List').child(id);
         firestore.remove();
     };
+
+    const handleResetEmail = () => {
+        firebaseConfig.auth().sendPasswordResetEmail(resetEmail)
+        .then(() => {
+        // Password reset email sent!
+        firebaseConfig.auth().signOut();
+        <Redirect to="/login"/>
+        })
+        .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorCode);
+        alert(errorMessage);
+        });
+    }
 
     if (!currentUser) {
         return <Redirect to="/login" />; 
@@ -184,6 +206,21 @@ export default function FirebaseCrud (){
                             </Table>
                         </Segment>
                         )}
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns = "1">
+                <Grid.Column>
+                    <Segment>
+                        <Form>
+                            <Form.Field>
+                                <label>Email</label>
+                                <Input placholder="อีเมล" title="กรุณากรอกอีเมลที่ต้องการจะรีเซ็ท" focus value={resetEmail}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <Button color ="teal" onClick={handleResetEmail}><Icon name ="mail"/>Reset E-mail</Button>
+                            </Form.Field>
+                        </Form>
+                    </Segment>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

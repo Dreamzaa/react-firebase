@@ -20,7 +20,7 @@ const Home = () => {
                             <br/>    
                             <br/>
                             <Link to="/register" class="btn btn-success btn-lg mx-auto"><Icon name="signup"/> Register</Link>
-                        </p>//d-grid gap-2 col-1 mx-auto
+                        </p>
                 )}
             </div>
         </>
