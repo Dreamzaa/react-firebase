@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Redirect, Link} from 'react-router-dom'
 import { AuthContext } from './Auth'
 import firebaseConfig from '../config'
-import { Icon} from 'semantic-ui-react'
+import { Icon, Container, Segment} from 'semantic-ui-react'
 
 const LogIn = () => {
 
@@ -26,6 +26,8 @@ const LogIn = () => {
 
 return (
     <>
+        <Container>
+            <Segment padded="very">
         <div class="container mt-5">
         <h1>Log In</h1>    
             <form onSubmit={handleSubmit}>
@@ -43,6 +45,8 @@ return (
             </div>
             </form>
         </div>
+        </Segment>
+        </Container>
     </>
 )
 }

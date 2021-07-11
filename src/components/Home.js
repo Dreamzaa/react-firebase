@@ -1,13 +1,15 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from './Auth'
-import { Icon } from 'semantic-ui-react'
+import { Icon ,Container, Segment} from 'semantic-ui-react'
 
 const Home = () => {
     const { currentUser } = useContext(AuthContext);
 
     return (
         <>
+            <Container>
+                <Segment padded ="very">
             <div class ="text-center mt-5 text-capitalize fs-5">
                 <div class="badge bg-danger text-wrap fs-1 "><h1>Welcome to</h1>
                 <h1>Authentication Firebase</h1></div>
@@ -23,6 +25,8 @@ const Home = () => {
                         </p>
                 )}
             </div>
+            </Segment>
+            </Container>
         </>
     )
 }

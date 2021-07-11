@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect, Link } from 'react-router-dom'
 import firebaseConfig from '../config'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Container, Segment} from 'semantic-ui-react'
 
 const Register = () => {
     const [currentUser, setCurrentUser] = useState(null);
@@ -137,6 +137,8 @@ const Register = () => {
 
     return (
         <>
+            <Container>
+                <Segment padded="very">
             <div class="container mt-5">
             <h1>Register</h1>    
             <form onSubmit={handleSubmit}>
@@ -180,6 +182,8 @@ const Register = () => {
             <br/>
             </form>
             </div>
+            </Segment>
+            </Container>
         </>
     )
 }
